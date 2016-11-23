@@ -9,4 +9,4 @@ libraryDependencies ++= Seq(
   "com.mohiva" %% "play-html-compressor" % "0.6.3"
 )
 
-doc in Compile <<= target.map(_ / "none")
+doc in Compile := target.map(_ / "none").value
