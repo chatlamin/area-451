@@ -2,22 +2,17 @@ body {
     background-color: #333333;
     color: #cccccc;
     font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
 }
 strong {
     color: #ffffff;
 }
-#content {
-    width: 640px;
-    margin: 0 auto;
-}
 #ru {
-    margin: 1em 0 1em 0;
-    font-size: 1.5em;
+    margin-top: 1em;
+    font-size: 1.7em;
 }
 #en {
-    margin: 1em 0 1em 0;
-    font-size: 1em;
+    margin-top: 1em;
+    font-size: 1.2em;
 }
 #sha256 {
     color: #333333;
