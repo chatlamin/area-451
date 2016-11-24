@@ -29,12 +29,14 @@ class Application @Inject() extends Controller {
     val u = urlForm.bindFromRequest()
     (d.hasErrors, u.hasErrors) match {
       case (false, _) =>
-        Ok(views.html.withDomain(d.value.get.domain))
+        UnavailableForLegalReasons(views.html.withDomain(d.value.get.domain))
       case (_, false) =>
-        Ok(views.html.withUrl(u.value.get.url))
+        UnavailableForLegalReasons(views.html.withUrl(u.value.get.url))
       case _ =>
-        Ok(views.html.default())
+        UnavailableForLegalReasons(views.html.default())
     }
   }
+
+  private val UnavailableForLegalReasons = new Status(451)
 
 }
