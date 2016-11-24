@@ -8,6 +8,7 @@ bin/activator dist
 
 docker build --tag alexanderfefelov/area-451 .
 docker run --name area-451 --detach --tty \
+  --restart always \
   --publish 80:9000 \
   --volume /etc/localtime:/etc/localtime:ro \
   --volume /etc/timezone:/etc/timezone:ro \
