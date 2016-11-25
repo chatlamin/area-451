@@ -1,5 +1,7 @@
 name := "area-451"
 
+maintainer := "Alexander Fefelov <alexanderfefelov@yandex.ru>"
+
 scalaVersion := "2.11.7"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
@@ -13,7 +15,6 @@ doc in Compile := target.map(_ / "none").value
 
 //--- sbt-native-packager: Docker
 
-maintainer in Docker := "Alexander Fefelov <alexanderfefelov@yandex.ru>"
 packageName in Docker := "alexanderfefelov/area-451"
 dockerBaseImage := "openjdk:8-jre"
 dockerExposedPorts := Seq(9000)
@@ -22,3 +23,16 @@ dockerExposedVolumes in Docker := Seq(
   "/opt/docker/public",
   "/opt/docker/logs"
 )
+
+//--- sbt-native-packager: Debian
+
+packageSummary in Debian := "area-451 application files"
+packageDescription in Debian := "Сервер со страницей-заглушкой для российских интернет-провайдеров, работающих по законам 139-ФЗ, 149-ФЗ, 187-ФЗ"
+
+//--- sbt-native-packager: RPM
+
+rpmVendor := "Alexander Fefelov <alexanderfefelov@yandex.ru>"
+packageSummary in Rpm := "area-451 application files"
+packageDescription in Rpm := "Сервер со страницей-заглушкой для российских интернет-провайдеров, работающих по законам 139-ФЗ, 149-ФЗ, 187-ФЗ"
+rpmLicense := Some("MIT License")
+version in Rpm := version.value.replaceAll("-", "_")

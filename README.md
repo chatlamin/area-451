@@ -11,3 +11,15 @@
       --volume /etc/localtime:/etc/localtime:ro \
       --volume /etc/timezone:/etc/timezone:ro \
       alexanderfefelov/area-451:1.0-SNAPSHOT
+
+## Debian
+
+    cd /tmp
+    git clone https://github.com/alexanderfefelov/area-451.git
+    sbt debian:packageBin
+
+## RPM
+
+    cd /tmp
+    git clone https://github.com/alexanderfefelov/area-451.git
+    sbt rpm:packageBin
