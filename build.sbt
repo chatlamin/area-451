@@ -27,12 +27,12 @@ dockerExposedVolumes in Docker := Seq(
 //--- sbt-native-packager: Debian
 
 packageSummary in Debian := "area-451 application files"
-packageDescription in Debian := "Сервер со страницей-заглушкой для российских интернет-провайдеров, работающих по законам 139-ФЗ, 149-ФЗ, 187-ФЗ"
+packageDescription in Debian := "Сервер со страницей-заглушкой для использования российскими интернет-провайдерами, работающими по законам 139-ФЗ, 149-ФЗ, 187-ФЗ"
 
 //--- sbt-native-packager: RPM
 
 rpmVendor := "Alexander Fefelov <alexanderfefelov@yandex.ru>"
 packageSummary in Rpm := "area-451 application files"
-packageDescription in Rpm := "Сервер со страницей-заглушкой для российских интернет-провайдеров, работающих по законам 139-ФЗ, 149-ФЗ, 187-ФЗ"
+packageDescription in Rpm := "Сервер со страницей-заглушкой для использования российскими интернет-провайдерами, работающими по законам 139-ФЗ, 149-ФЗ, 187-ФЗ"
 rpmLicense := Some("MIT License")
 version in Rpm := version.value.replaceAll("-", "_")
