@@ -1,4 +1,4 @@
-@()(content: Html)
+@(styles: String)(content: Html)
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Доступ запрещён</title>
         <link rel="stylesheet" href="@routes.Assets.versioned("css/bootstrap/css/bootstrap.min.css")">
-        <link rel="stylesheet" href="@routes.Assets.versioned("css/main.css")">
+        <style type="text/css">@styles</style>
     </head>
     <body>
         <div class="container">
