@@ -1,34 +1,60 @@
 <configuration>
 
-  <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %logger [%level] %message%n</pattern>
+        </encoder>
+    </appender>
 
-  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>${application.home:-.}/logs/application.log</file>
-    <encoder>
-      <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
-    </encoder>
-  </appender>
+    <appender name="FILE-APPLICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${application.home}/logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${application.home}/logs/application.%d</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date %logger [%level] %message %xException%n</pattern>
+        </encoder>
+    </appender>
 
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
-    </encoder>
-  </appender>
+    <appender name="FILE-PLAY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${application.home}/logs/play.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${application.home}/logs/play.%d</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date %logger [%level] %message %xException%n</pattern>
+        </encoder>
+    </appender>
 
-  <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
-    <appender-ref ref="FILE" />
-  </appender>
+    <appender name="FILE-ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${application.home}/logs/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${application.home}/logs/access.%d</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date %logger [%level] %message %xException%n</pattern>
+        </encoder>
+    </appender>
 
-  <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
-    <appender-ref ref="STDOUT" />
-  </appender>
+    <logger name="play" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-PLAY"/>
+    </logger>
 
-  <logger name="play" level="INFO" />
-  <logger name="application" level="DEBUG" />
+    <logger name="application" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-APPLICATION"/>
+    </logger>
 
-  <root level="WARN">
-    <appender-ref ref="ASYNCFILE" />
-    <appender-ref ref="ASYNCSTDOUT" />
-  </root>
+    <logger name="access" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-ACCESS"/>
+    </logger>
 
 </configuration>
