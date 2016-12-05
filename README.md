@@ -4,7 +4,8 @@
 
     cd /tmp
     git clone https://github.com/alexanderfefelov/area-451.git
-    bin/activator docker:publishLocal 
+    cd area-451
+    bin/activator docker:publishLocal
     docker run --name area-451 --detach --tty \
       --restart always \
       --publish 80:9000 \
@@ -16,10 +17,12 @@
 
     cd /tmp
     git clone https://github.com/alexanderfefelov/area-451.git
+    cd area-451
     sbt debian:packageBin
 
 ## RPM
 
     cd /tmp
     git clone https://github.com/alexanderfefelov/area-451.git
+    cd area-451
     sbt rpm:packageBin
