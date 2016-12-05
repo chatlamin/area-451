@@ -18,9 +18,8 @@ doc in Compile := target.map(_ / "none").value
 packageName in Docker := "alexanderfefelov/area-451"
 dockerBaseImage := "openjdk:8-jre"
 dockerExposedPorts := Seq(9000)
-dockerExposedVolumes in Docker := Seq(
+dockerExposedVolumes := Seq(
   "/opt/docker/conf",
-  "/opt/docker/public",
   "/opt/docker/logs"
 )
 
