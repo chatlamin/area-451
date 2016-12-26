@@ -8,7 +8,10 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 libraryDependencies ++= Seq(
   filters,
-  "com.mohiva" %% "play-html-compressor" % "0.6.3"
+  "com.mohiva" %% "play-html-compressor" % "0.6.3",
+  "nl.grons" %% "metrics-scala" % "3.5.5",
+  "io.dropwizard.metrics" % "metrics-graphite" % "3.1.2",
+  "org.mpierce.metrics.reservoir" % "hdrhistogram-metrics-reservoir" % "1.1.0"
 )
 
 doc in Compile := target.map(_ / "none").value

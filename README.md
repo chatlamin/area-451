@@ -5,6 +5,7 @@
     cd /tmp
     git clone https://github.com/alexanderfefelov/area-451.git
     cd area-451
+    vi conf/graphite.conf
     bin/activator docker:publishLocal
     docker run --name area-451 --detach --tty \
       --restart always \
