@@ -6,12 +6,16 @@ scalaVersion := "2.11.7"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
+resolvers ++= Seq(
+  Resolver.jcenterRepo
+)
+
 libraryDependencies ++= Seq(
   filters,
   "com.mohiva" %% "play-html-compressor" % "0.6.3",
   "nl.grons" %% "metrics-scala" % "3.5.5",
   "io.dropwizard.metrics" % "metrics-graphite" % "3.1.2",
-  "org.mpierce.metrics.reservoir" % "hdrhistogram-metrics-reservoir" % "1.1.0"
+  "org.mpierce.metrics.reservoir" % "hdrhistogram-metrics-reservoir" % "1.1.2"
 )
 
 doc in Compile := target.map(_ / "none").value
