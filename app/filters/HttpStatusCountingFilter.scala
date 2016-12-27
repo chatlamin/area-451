@@ -14,7 +14,7 @@ import scala.collection.mutable
 
 class HttpStatusCountingFilter @Inject() (implicit val mat: Materializer, override val metricsManager: MetricsManager) extends Filter with Instrumented {
 
-  var counters: mutable.Map[String, Counter] = scala.collection.mutable.Map[String, Counter]()
+  private val counters: mutable.Map[String, Counter] = scala.collection.mutable.Map[String, Counter]()
 
   def apply(next: (RequestHeader) => Future[Result])(request: RequestHeader): Future[Result] = {
     val resultFuture = next(request)
