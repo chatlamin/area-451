@@ -12,7 +12,7 @@ import play.api.inject.ApplicationLifecycle
 import scala.concurrent.Future
 
 @Singleton
-class MetricsManager @Inject()(configuration: Configuration, lifecycle: ApplicationLifecycle) {
+class MetricsManager @Inject() (configuration: Configuration, lifecycle: ApplicationLifecycle) {
 
   val metricRegistry: MetricRegistry = new MetricRegistry()
   private val graphiteEnabled: Boolean = configuration.underlying.getBoolean("graphite.enabled")

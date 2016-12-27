@@ -11,8 +11,6 @@ import scala.concurrent.Future
 
 class AccessLoggingFilter @Inject() (implicit val mat: Materializer) extends Filter {
 
-  private val accessLogger = Logger("access")
-
   def apply(next: (RequestHeader) => Future[Result])(request: RequestHeader): Future[Result] = {
     val resultFuture = next(request)
 
@@ -26,4 +24,7 @@ class AccessLoggingFilter @Inject() (implicit val mat: Materializer) extends Fil
 
     resultFuture
   }
+
+  private val accessLogger = Logger("access")
+
 }

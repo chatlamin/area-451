@@ -12,9 +12,8 @@ import play.api.mvc._
 
 import scala.collection.mutable
 
-class HttpStatusCountingFilter @Inject() (implicit val mat: Materializer, override val metricsManager: MetricsManager) extends Filter with Instrumented {
-
-  private val counters: mutable.Map[String, Counter] = scala.collection.mutable.Map[String, Counter]()
+class HttpStatusCountingFilter @Inject() (implicit val mat: Materializer, override val metricsManager: MetricsManager)
+  extends Filter with Instrumented {
 
   def apply(next: (RequestHeader) => Future[Result])(request: RequestHeader): Future[Result] = {
     val resultFuture = next(request)
@@ -32,5 +31,7 @@ class HttpStatusCountingFilter @Inject() (implicit val mat: Materializer, overri
       }
     )
   }
+
+  private val counters: mutable.Map[String, Counter] = scala.collection.mutable.Map[String, Counter]()
 
 }
