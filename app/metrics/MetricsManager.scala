@@ -15,20 +15,22 @@ import scala.concurrent.Future
 class MetricsManager @Inject()(configuration: Configuration, lifecycle: ApplicationLifecycle) {
 
   val metricRegistry: MetricRegistry = new MetricRegistry()
-  val graphiteHost: String = configuration.underlying.getString("graphite.host")
-  val graphitePort: Int = configuration.underlying.getInt("graphite.port")
-  val graphitePrefix: String = configuration.underlying.getString("graphite.prefix")
-  val graphite: GraphiteUDP = new GraphiteUDP(new InetSocketAddress(graphiteHost, graphitePort))
-  val graphiteReporter: GraphiteReporter = GraphiteReporter.forRegistry(metricRegistry)
-    .prefixedWith(s"$graphitePrefix.${InetAddress.getLocalHost.getHostName}")
-    .convertRatesTo(TimeUnit.SECONDS)
-    .convertDurationsTo(TimeUnit.MILLISECONDS)
-    .filter(MetricFilter.ALL)
-    .build(graphite)
-  graphiteReporter.start(1, TimeUnit.MINUTES)
-
-  lifecycle.addStopHook { () =>
-    Future.successful(graphiteReporter.close())
+  private val graphiteEnabled: Boolean = configuration.underlying.getBoolean("graphite.enabled")
+  if (graphiteEnabled) {
+    val graphiteHost: String = configuration.underlying.getString("graphite.host")
+    val graphitePort: Int = configuration.underlying.getInt("graphite.port")
+    val graphitePrefix: String = configuration.underlying.getString("graphite.prefix")
+    val graphite: GraphiteUDP = new GraphiteUDP(new InetSocketAddress(graphiteHost, graphitePort))
+    val graphiteReporter = GraphiteReporter.forRegistry(metricRegistry)
+      .prefixedWith(s"$graphitePrefix.${InetAddress.getLocalHost.getHostName}")
+      .convertRatesTo(TimeUnit.SECONDS)
+      .convertDurationsTo(TimeUnit.MILLISECONDS)
+      .filter(MetricFilter.ALL)
+      .build(graphite)
+    graphiteReporter.start(1, TimeUnit.MINUTES)
+    lifecycle.addStopHook { () =>
+      Future.successful(graphiteReporter.close())
+    }
   }
 
 }
