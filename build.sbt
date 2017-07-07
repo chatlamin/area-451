@@ -2,7 +2,7 @@ name := "area-451"
 
 maintainer := "Alexander Fefelov <alexanderfefelov@yandex.ru>"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.2"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
@@ -11,9 +11,10 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
+  guice,
   filters,
-  "com.mohiva" %% "play-html-compressor" % "0.6.3",
-  "nl.grons" %% "metrics-scala" % "3.5.5",
+  "com.mohiva" %% "play-html-compressor" % "0.7.0",
+  "nl.grons" %% "metrics-scala" % "3.5.9_a2.4",
   "io.dropwizard.metrics" % "metrics-graphite" % "3.1.2",
   "org.mpierce.metrics.reservoir" % "hdrhistogram-metrics-reservoir" % "1.1.2",
   "org.webjars" % "bootstrap" % "3.3.7"
