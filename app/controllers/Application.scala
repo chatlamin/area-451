@@ -8,7 +8,8 @@ import play.api.data.Forms._
 import play.api.mvc._
 
 @Singleton
-class Application @Inject() (configuration: Configuration) extends Controller {
+class Application @Inject() (components: ControllerComponents, configuration: Configuration)
+  extends AbstractController(components) {
 
   case class DomainFormModel(domain: String)
   case class UrlFormModel(url: String)
